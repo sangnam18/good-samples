@@ -19,6 +19,12 @@
 		</listeners>
 	</job>
 
+	<job id="helloJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="hello">
+			<tasklet ref="helloTasklet" />
+		</step>
+	</job>
+
 	<bean id="jobLauncher"
 		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
 		<property name="jobRepository" ref="jobRepository" />

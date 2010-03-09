@@ -3,8 +3,6 @@ package com.googlecode.goodsamples.springbatch;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,42 +22,30 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = { "/batchContext.xml" })
 @TransactionConfiguration
 @Transactional
-public class NameJobLaunchTest {
-	@Autowired
-	InMemoryNameDAO inMemorynameDAOImpl;
+public class HelloJobLaunchTest {
 	@Autowired
 	JobLauncher jobLauncher;
 	@Autowired
-	Job nameJob;
+	Job helloJob;
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Before
 	public void prepare() throws Exception {
-		assertThat(nameJob.getName(), is("nameJob"));
-		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
+		assertThat(helloJob.getName(), is("helloJob"));
+		jdbcTemplate.execute(IOUtils.toString(HelloJobLaunchTest.class
 				.getResourceAsStream("/schema-hsqldb.sql")));
-
-		inMemorynameDAOImpl.insert(new Name("Min"));
-		inMemorynameDAOImpl.insert(new Name("Jea"));
 	}
 
 	@After
 	public void rollback() throws Exception {
-		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
+		jdbcTemplate.execute(IOUtils.toString(HelloJobLaunchTest.class
 				.getResourceAsStream("/schema-drop-hsqldb.sql")));
-
-		inMemorynameDAOImpl.truncate();
 	}
 
 	@Test
 	public void jobShouldBeRanWithoutAnyException() throws Exception {
-		 jobLauncher.run(nameJob, new JobParameters());
 		
-		 LinkedList<Name> result = inMemorynameDAOImpl.selectAll();
-		
-		 assertThat(result.size(), is(2));
-		 assertThat(result.get(0).name, is("Min-modified"));
-		 assertThat(result.get(1).name, is("Jea-modified"));
+		 jobLauncher.run(helloJob, new JobParameters());
 	}
 }
