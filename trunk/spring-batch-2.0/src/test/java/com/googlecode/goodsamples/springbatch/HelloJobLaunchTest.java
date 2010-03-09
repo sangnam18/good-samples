@@ -45,7 +45,6 @@ public class HelloJobLaunchTest {
 
 	@Test
 	public void jobShouldBeRanWithoutAnyException() throws Exception {
-		
 		 jobLauncher.run(helloJob, new JobParameters());
 	}
 }
