@@ -7,7 +7,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 public class HelloJob implements Job {
-
 	public static final Object MESSAGE = "Hello";
 	public Log log = LogFactory.getLog(HelloJob.class);
 
