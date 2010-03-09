@@ -1,5 +1,6 @@
 package com.googlecode.goodsamples.springbatch;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -33,8 +34,8 @@ public class NameReaderTest {
 
 	@Test
 	public void readerShouldReturnExpectedStringsSequentially() throws Exception {
-		assertEquals(FIRST_ROW, O.read());
-		assertEquals(SECOND_ROW, O.read());
-		assertNull(O.read());
+		assertThat(O.read(), is(FIRST_ROW));
+		assertThat(O.read(), is(SECOND_ROW));
+		assertThat(O.read(), is(nullValue()));
 	}
 }

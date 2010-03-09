@@ -1,5 +1,6 @@
 package com.googlecode.goodsamples.springbatch;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -14,6 +15,6 @@ public class NameProcessorTest {
 	@Test
 	public void nameShouldBeModified() throws Exception {
 		Name name = new Name(1, "Min");
-		assertEquals(new Name(1, "Min-modified"), O.process(name));
+		assertThat(O.process(name), is(new Name(1, "Min-modified")));
 	}
 }

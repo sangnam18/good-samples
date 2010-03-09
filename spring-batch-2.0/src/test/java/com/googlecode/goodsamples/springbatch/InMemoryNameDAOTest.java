@@ -9,10 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.googlecode.goodsamples.springbatch.InMemoryNameDAO;
-import com.googlecode.goodsamples.springbatch.Name;
-import com.googlecode.goodsamples.springbatch.NameDAO;
-
 public class InMemoryNameDAOTest {
 	NameDAO O = new InMemoryNameDAO();
 	Name name = new Name("Min");
@@ -46,6 +42,6 @@ public class InMemoryNameDAOTest {
 
 		assertThat(result.size(), is(1));
 		result.poll();
-		assertNull(result.poll());
+		assertThat(result.poll(), is(nullValue()));
 	}
 }
