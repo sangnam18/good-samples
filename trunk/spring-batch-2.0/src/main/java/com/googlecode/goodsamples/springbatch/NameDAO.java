@@ -2,7 +2,7 @@ package com.googlecode.goodsamples.springbatch;
 
 import java.util.LinkedList;
 
-//TODO Cursor 기반 예제 추가 필요
+//TODO Add an example based on cursor.  
 public interface NameDAO {
 	Name insert(Name name);
 
