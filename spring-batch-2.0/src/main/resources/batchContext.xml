@@ -19,6 +19,18 @@
 		</listeners>
 	</job>
 
+	<job id="retryJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="retry">
+			<tasklet>
+				<chunk reader="retryStreamItemReader" writer="retryWriter"
+					commit-interval="3"/>
+			</tasklet>
+		</step>
+		<listeners>
+			<listener ref="nameJobListener" />
+		</listeners>
+	</job>
+
 	<job id="helloJob" xmlns="http://www.springframework.org/schema/batch">
 		<step id="hello">
 			<tasklet ref="helloTasklet" />
@@ -31,23 +43,14 @@
 	</bean>
 
 	<import resource="datasourceContext.xml" />
-	
+
 	<job-repository id="jobRepository" data-source="dataSource"
-		transaction-manager="transactionManager"
-		isolation-level-for-create="SERIALIZABLE" table-prefix="BATCH_"
-		xmlns="http://www.springframework.org/schema/batch"/>
+		transaction-manager="transactionManager" isolation-level-for-create="SERIALIZABLE"
+		table-prefix="BATCH_" xmlns="http://www.springframework.org/schema/batch" />
 
-	<!-- 
-	
-	If you don`t want to use Hypersonic, you can instead use following beans.
-	
-	<bean id="jobRepository"
-		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
-		<property name="transactionManager" ref="transactionManager" />
-	</bean>
-
-	<bean id="transactionManager"
-		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager">
-	</bean>
-	-->
+	<!-- If you don`t want to use Hypersonic, you can instead use following 
+		beans. <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"> 
+		<property name="transactionManager" ref="transactionManager" /> </bean> <bean 
+		id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"> 
+		</bean> -->
 </beans>
