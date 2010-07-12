@@ -66,5 +66,4 @@ public class JobRetryTest {
 		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
 				.getResourceAsStream("/schema-drop-hsqldb.sql")));
 	}
-
 }
