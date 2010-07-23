@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ClassScanner {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked"})
 	public static List<Class> getClassesAnnotated(String packageName,
 			Class<? extends Annotation> annotation)
 			throws ClassNotFoundException, IOException {
