@@ -74,7 +74,7 @@ public class ColumnRangePartitioner implements Partitioner {
 		int max = jdbcTemplate.queryForInt("SELECT MAX(" + column + ") from "
 				+ table);
 		int targetSize = (max - min) / gridSize + 1;
-
+		
 		Map<String, ExecutionContext> result = new HashMap<String, ExecutionContext>();
 		int number = 0;
 		int start = min;
