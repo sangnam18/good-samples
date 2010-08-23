@@ -1,7 +1,7 @@
 package com.googlecode.goodsamples.springbatch.basic;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.LinkedList;
 
@@ -20,16 +20,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.googlecode.goodsamples.springbatch.InMemoryNameDAO;
-import com.googlecode.goodsamples.springbatch.basic.Name;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/META-INF/spring/BasicContext.xml" })
 @TransactionConfiguration
 @Transactional
 public class NameJobLaunchTest {
 	@Autowired
-	InMemoryNameDAO inMemorynameDAOImpl;
+	InMemoryNameDAO inMemoryNameDAO;
 	@Autowired
 	JobLauncher jobLauncher;
 	@Autowired
@@ -42,9 +39,8 @@ public class NameJobLaunchTest {
 		assertThat(nameJob.getName(), is("nameJob"));
 		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
 				.getResourceAsStream("/schema-hsqldb.sql")));
-
-		inMemorynameDAOImpl.insert(new Name("Min"));
-		inMemorynameDAOImpl.insert(new Name("Jea"));
+		inMemoryNameDAO.insert(new Name("Min"));
+		inMemoryNameDAO.insert(new Name("Jea"));
 	}
 
 	@After
@@ -52,14 +48,14 @@ public class NameJobLaunchTest {
 		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
 				.getResourceAsStream("/schema-drop-hsqldb.sql")));
 
-		inMemorynameDAOImpl.truncate();
+		inMemoryNameDAO.truncate();
 	}
 
 	@Test
 	public void jobShouldBeRanWithoutAnyException() throws Exception {
 		 jobLauncher.run(nameJob, new JobParameters());
 		
-		 LinkedList<Name> result = inMemorynameDAOImpl.selectAll();
+		 LinkedList<Name> result = inMemoryNameDAO.selectAll();
 		
 		 assertThat(result.size(), is(2));
 		 assertThat(result.get(0).name, is("Min-modified"));

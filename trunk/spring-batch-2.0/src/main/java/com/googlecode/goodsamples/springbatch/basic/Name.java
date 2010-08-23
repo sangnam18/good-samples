@@ -4,7 +4,7 @@ public class Name {
 	private Integer id;
 	String name;
 
-	Name(Integer id, String name) {
+	public Name(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -24,7 +24,11 @@ public class Name {
 	public Integer id() {
 		return id;
 	}
-
+	
+	public String name() {
+		return this.name;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}

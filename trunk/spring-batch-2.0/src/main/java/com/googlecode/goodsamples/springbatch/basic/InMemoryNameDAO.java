@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,8 +7,6 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.googlecode.goodsamples.springbatch.basic.Name;
-import com.googlecode.goodsamples.springbatch.basic.NameDAO;
 
 @Repository
 public class InMemoryNameDAO implements NameDAO {
