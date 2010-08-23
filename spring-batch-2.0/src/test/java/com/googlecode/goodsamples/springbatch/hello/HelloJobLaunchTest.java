@@ -1,9 +1,7 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.hello;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-
-import java.util.LinkedList;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
@@ -21,45 +19,32 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/batchContext.xml" })
+@ContextConfiguration(locations = { "/META-INF/spring/HelloContext.xml" })
 @TransactionConfiguration
 @Transactional
-public class NameJobLaunchTest {
-	@Autowired
-	InMemoryNameDAO inMemorynameDAOImpl;
+public class HelloJobLaunchTest {
 	@Autowired
 	JobLauncher jobLauncher;
 	@Autowired
-	Job nameJob;
+	Job helloJob;
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Before
 	public void prepare() throws Exception {
-		assertThat(nameJob.getName(), is("nameJob"));
-		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
+		assertThat(helloJob.getName(), is("helloJob"));
+		jdbcTemplate.execute(IOUtils.toString(HelloJobLaunchTest.class
 				.getResourceAsStream("/schema-hsqldb.sql")));
-
-		inMemorynameDAOImpl.insert(new Name("Min"));
-		inMemorynameDAOImpl.insert(new Name("Jea"));
 	}
 
 	@After
 	public void rollback() throws Exception {
-		jdbcTemplate.execute(IOUtils.toString(NameJobLaunchTest.class
+		jdbcTemplate.execute(IOUtils.toString(HelloJobLaunchTest.class
 				.getResourceAsStream("/schema-drop-hsqldb.sql")));
-
-		inMemorynameDAOImpl.truncate();
 	}
 
 	@Test
-	public void jobShouldBeRanWithoutAnyException() throws Exception {
-		 jobLauncher.run(nameJob, new JobParameters());
-		
-		 LinkedList<Name> result = inMemorynameDAOImpl.selectAll();
-		
-		 assertThat(result.size(), is(2));
-		 assertThat(result.get(0).name, is("Min-modified"));
-		 assertThat(result.get(1).name, is("Jea-modified"));
+	public void jobShouldBeRunWithoutAnyException() throws Exception {
+		 jobLauncher.run(helloJob, new JobParameters());
 	}
 }

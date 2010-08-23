@@ -9,6 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.googlecode.goodsamples.springbatch.basic.Name;
+import com.googlecode.goodsamples.springbatch.basic.NameDAO;
+
 public class InMemoryNameDAOTest {
 	NameDAO O = new InMemoryNameDAO();
 	Name name = new Name("Min");

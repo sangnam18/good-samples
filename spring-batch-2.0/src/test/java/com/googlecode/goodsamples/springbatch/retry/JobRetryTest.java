@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.retry;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -23,8 +23,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.goodsamples.springbatch.basic.NameDAO;
+import com.googlecode.goodsamples.springbatch.basic.NameJobLaunchTest;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/batchContext.xml" })
+@ContextConfiguration(locations = { "/META-INF/spring/RetryContext.xml" })
 @TransactionConfiguration(defaultRollback=true)
 @Transactional
 public class JobRetryTest {

@@ -7,30 +7,6 @@
 
 	<context:component-scan base-package="com.googlecode" />
 
-	<job id="nameJob" xmlns="http://www.springframework.org/schema/batch">
-		<step id="name">
-			<tasklet>
-				<chunk reader="nameReader" processor="nameProcessor" writer="nameWriter"
-					commit-interval="3" />
-			</tasklet>
-		</step>
-		<listeners>
-			<listener ref="nameJobListener" />
-		</listeners>
-	</job>
-
-	<job id="retryJob" xmlns="http://www.springframework.org/schema/batch">
-		<step id="retry">
-			<tasklet>
-				<chunk reader="retryStreamItemReader" writer="retryWriter"
-					commit-interval="3"/>
-			</tasklet>
-		</step>
-		<listeners>
-			<listener ref="nameJobListener" />
-		</listeners>
-	</job>
-
 	<job id="helloJob" xmlns="http://www.springframework.org/schema/batch">
 		<step id="hello">
 			<tasklet ref="helloTasklet" />

@@ -1,10 +1,12 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.hello;
 
 import static org.mockito.Mockito.*;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+
+
 
 public class HelloTaskletTest {
 	Tasklet O = new HelloTasklet();

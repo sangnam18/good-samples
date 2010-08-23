@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.hello;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
