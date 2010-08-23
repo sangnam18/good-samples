@@ -45,7 +45,7 @@ public class JobPartitionTest extends AbstractJobRepositoryInitilization {
 	}
 
 	private int rowCountOfNameTable() {
-		return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM targetName");
+		return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM targetOfName");
 	}
 
 	private void insertTenRowsToNameTable() {
