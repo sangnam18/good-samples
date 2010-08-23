@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.retry;
 
 import java.util.ArrayList;
 import java.util.List;

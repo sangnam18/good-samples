@@ -19,6 +19,12 @@ public class NameReader implements ItemReader<Name> {
 		if (rows == null) {
 			rows = nameDAO.selectAll();
 		}
+		
+		if (rows.peek() != null) {
+			System.out.println(Thread.currentThread().toString() + " " + rows.peek().toString());
+		} else {
+			System.out.println(Thread.currentThread().toString() + " null");			
+		}
 		return rows.poll();
 	}
 }

@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.googlecode.goodsamples.springbatch.basic.InMemoryNameDAO;
 import com.googlecode.goodsamples.springbatch.basic.Name;
 import com.googlecode.goodsamples.springbatch.basic.NameDAO;
 
