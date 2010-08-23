@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 public class Name {
 	private Integer id;

@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.googlecode.goodsamples.springbatch.basic.Name;
+import com.googlecode.goodsamples.springbatch.basic.NameDAO;
+
 @Repository
 public class InMemoryNameDAO implements NameDAO {
 	Map<Integer, Name> database = new HashMap<Integer, Name>();

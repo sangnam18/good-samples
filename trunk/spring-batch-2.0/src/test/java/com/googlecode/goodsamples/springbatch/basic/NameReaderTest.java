@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.batch.item.ItemReader;
 
-import com.googlecode.goodsamples.springbatch.Name;
-import com.googlecode.goodsamples.springbatch.NameDAO;
-import com.googlecode.goodsamples.springbatch.NameReader;
+import com.googlecode.goodsamples.springbatch.basic.Name;
+import com.googlecode.goodsamples.springbatch.basic.NameDAO;
+import com.googlecode.goodsamples.springbatch.basic.NameReader;
+
 
 public class NameReaderTest {
 	final Name FIRST_ROW = new Name("Min");

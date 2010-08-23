@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

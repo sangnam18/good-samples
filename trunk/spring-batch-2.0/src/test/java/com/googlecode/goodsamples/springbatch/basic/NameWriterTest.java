@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 import static org.mockito.Mockito.*;
 
@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.springframework.batch.item.ItemWriter;
 
 import com.googlecode.goodsamples.springbatch.InMemoryNameDAO;
-import com.googlecode.goodsamples.springbatch.Name;
-import com.googlecode.goodsamples.springbatch.NameDAO;
-import com.googlecode.goodsamples.springbatch.NameWriter;
+import com.googlecode.goodsamples.springbatch.basic.Name;
+import com.googlecode.goodsamples.springbatch.basic.NameDAO;
+import com.googlecode.goodsamples.springbatch.basic.NameWriter;
 
 public class NameWriterTest {
 	ItemWriter<Name> O = new NameWriter();

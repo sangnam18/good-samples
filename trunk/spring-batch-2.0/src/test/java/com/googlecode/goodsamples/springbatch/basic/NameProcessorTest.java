@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch;
+package com.googlecode.goodsamples.springbatch.basic;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -6,8 +6,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.batch.item.ItemProcessor;
 
-import com.googlecode.goodsamples.springbatch.Name;
-import com.googlecode.goodsamples.springbatch.NameProcessor;
+import com.googlecode.goodsamples.springbatch.basic.Name;
+import com.googlecode.goodsamples.springbatch.basic.NameProcessor;
+
 
 public class NameProcessorTest {
 	ItemProcessor<Name, Name> O = new NameProcessor();
