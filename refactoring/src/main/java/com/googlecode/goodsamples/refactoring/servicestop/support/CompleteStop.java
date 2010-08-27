@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.refactoring.stop.support;
+package com.googlecode.goodsamples.refactoring.servicestop.support;
 
 public class CompleteStop {
 	public boolean stop() {
