@@ -9,9 +9,9 @@ import com.googlecode.goodsamples.refactoring.stop.support.Stop;
 import com.googlecode.goodsamples.refactoring.stop.support.StopMessage;
 
 public class ServiceStopper {
-	private Stop completeStop;
-	private Stop readOnlyStop;
-	private ReadOnlyNotifier readOnlyNotifier;
+	Stop completeStop;
+	Stop readOnlyStop;
+	ReadOnlyNotifier readOnlyNotifier;
 
 	public void stop(Integer type, String reason) {
 		if (type != null && (type == 0 || type == 1)) {
@@ -35,6 +35,8 @@ public class ServiceStopper {
 						throw new FailedStopException("Cannot stop the service.");
 					}
 				}
+				
+				return;
 			}
 		}
 		
