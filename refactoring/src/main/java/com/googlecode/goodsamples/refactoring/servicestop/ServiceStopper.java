@@ -14,7 +14,7 @@ public class ServiceStopper {
 	ReadOnlyNotifier readOnlyNotifier;
 
 	public void stop(Integer type, String reason) {
-		if (type != null && (type == 0 || type == 1)) {
+		if (type != null && (type == 1 || type == 2)) {
 			if (reason != null && reason.length() > 0) {
 				if (type == 1) {
 					if (completeStop.stopNow() == false) {
