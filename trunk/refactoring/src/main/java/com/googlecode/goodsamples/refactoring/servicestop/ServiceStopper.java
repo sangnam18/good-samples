@@ -32,12 +32,17 @@ public class ServiceStopper {
 			stopNow(completeStop);
 		} else {
 			stopNow(readOnlyStop);
-			StopMessage stopMessage = new StopMessage();
-			stopMessage.setReason(reason);
-			stopMessage.setDate(new Date());
 			
+			StopMessage stopMessage = createStopMessageBy(reason);
 			readOnlyNotifier.notifyToRelatedServices(stopMessage);
 		}
+	}
+
+	private StopMessage createStopMessageBy(String reason) {
+		StopMessage stopMessage = new StopMessage();
+		stopMessage.setReason(reason);
+		stopMessage.setDate(new Date());
+		return stopMessage;
 	}
 
 	private void stopNow(Stop specificStop) {
