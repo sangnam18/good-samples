@@ -32,9 +32,7 @@ public class ServiceStopper {
 			stopNow(completeStop);
 		} else {
 			stopNow(readOnlyStop);
-			
-			StopMessage stopMessage = createStopMessageBy(reason);
-			readOnlyNotifier.notifyToRelatedServices(stopMessage);
+			readOnlyNotifier.notifyToRelatedServices(createStopMessageBy(reason));
 		}
 	}
 
