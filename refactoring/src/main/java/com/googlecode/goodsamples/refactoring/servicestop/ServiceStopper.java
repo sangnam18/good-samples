@@ -21,7 +21,7 @@ public class ServiceStopper {
 	
 	public void stop(StopType stopType, String reason) {
 		if (stopType == null) {
-			throw new IllegalArgumentException("StopType cannot be empty.");
+			throw new IllegalArgumentException("StopType cannot be null.");
 		}
 		
 		if (isEmpty(reason)) {
@@ -44,8 +44,8 @@ public class ServiceStopper {
 	}
 
 	private void stopNow(Stop specificStop) {
-		boolean result = specificStop.stopNow();
-		if (result == false) {
+		boolean success = specificStop.stopNow();
+		if (success == false) {
 			throw new FailedStopException("Cannot stop the service.");
 		}		
 	}
