@@ -11,13 +11,4 @@ public class ReadOnlyNotifier {
 	public boolean notifyToRelatedServices(StopMessage stopMessage) {
 		return false;
 	}
-
-	public void notifyToAllSubscribersIfItNeeds(StopMessage stopMessage) {
-		if (getRelatedServices().size() > 0) {
-			if (notifyToRelatedServices(stopMessage) == false)  {
-				throw new FailedReadOnlyNotificationException();
-			}
-		}	
-	}
-
 }
