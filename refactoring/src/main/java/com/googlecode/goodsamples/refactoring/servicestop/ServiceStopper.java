@@ -18,7 +18,7 @@ public class ServiceStopper {
 		COMPLETE_STOP,
 		READONLY_STOP;
 	}
-
+	
 	public void stop(StopType stopType, String reason) {
 		if (stopType == null) {
 			throw new IllegalArgumentException("StopType cannot be empty.");
@@ -29,23 +29,25 @@ public class ServiceStopper {
 		}
 		
 		if (stopType == StopType.COMPLETE_STOP) {
-			if (completeStop.stopNow() == false) {
-				throw new FailedStopException("Cannot stop the service.");
-			}
+			stopNow(completeStop);
 		} else {
-			if (readOnlyStop.stopNow()) {
-				StopMessage stopMessage = new StopMessage();
-				stopMessage.setReason(reason);
-				stopMessage.setDate(new Date());
-				
-				if (readOnlyNotifier.getRelatedServices().size() > 0) {
-					if (readOnlyNotifier.notifyToRelatedServices(stopMessage) == false)  {
-						throw new FailedReadOnlyNotificationException();
-					}
+			stopNow(readOnlyStop);
+			StopMessage stopMessage = new StopMessage();
+			stopMessage.setReason(reason);
+			stopMessage.setDate(new Date());
+			
+			if (readOnlyNotifier.getRelatedServices().size() > 0) {
+				if (readOnlyNotifier.notifyToRelatedServices(stopMessage) == false)  {
+					throw new FailedReadOnlyNotificationException();
 				}
-			} else {
-				throw new FailedStopException("Cannot stop the service.");
 			}
 		}
+	}
+
+	private void stopNow(Stop specificStop) {
+		boolean result = specificStop.stopNow();
+		if (result == false) {
+			throw new FailedStopException("Cannot stop the service.");
+		}		
 	}
 }
