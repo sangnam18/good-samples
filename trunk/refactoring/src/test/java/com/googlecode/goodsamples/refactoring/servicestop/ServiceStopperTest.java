@@ -14,11 +14,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.googlecode.goodsamples.refactoring.stop.support.FailedReadOnlyNotificationException;
-import com.googlecode.goodsamples.refactoring.stop.support.FailedStopException;
-import com.googlecode.goodsamples.refactoring.stop.support.ReadOnlyNotifier;
-import com.googlecode.goodsamples.refactoring.stop.support.Stop;
-import com.googlecode.goodsamples.refactoring.stop.support.StopMessage;
+import com.googlecode.goodsamples.refactoring.servicestop.support.FailedReadOnlyNotificationException;
+import com.googlecode.goodsamples.refactoring.servicestop.support.FailedStopException;
+import com.googlecode.goodsamples.refactoring.servicestop.support.ReadOnlyNotifier;
+import com.googlecode.goodsamples.refactoring.servicestop.support.Stop;
+import com.googlecode.goodsamples.refactoring.servicestop.support.StopMessage;
 
 @RunWith(MockitoJUnitRunner.class)
 public final class ServiceStopperTest {

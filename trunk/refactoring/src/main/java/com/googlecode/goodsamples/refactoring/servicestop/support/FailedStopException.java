@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.refactoring.stop.support;
+package com.googlecode.goodsamples.refactoring.servicestop.support;
 
 @SuppressWarnings("serial")
 public class FailedStopException extends RuntimeException {

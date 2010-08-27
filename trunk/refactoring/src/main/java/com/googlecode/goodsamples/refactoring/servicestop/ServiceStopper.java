@@ -2,11 +2,11 @@ package com.googlecode.goodsamples.refactoring.servicestop;
 
 import java.util.Date;
 
-import com.googlecode.goodsamples.refactoring.stop.support.FailedReadOnlyNotificationException;
-import com.googlecode.goodsamples.refactoring.stop.support.FailedStopException;
-import com.googlecode.goodsamples.refactoring.stop.support.ReadOnlyNotifier;
-import com.googlecode.goodsamples.refactoring.stop.support.Stop;
-import com.googlecode.goodsamples.refactoring.stop.support.StopMessage;
+import com.googlecode.goodsamples.refactoring.servicestop.support.FailedReadOnlyNotificationException;
+import com.googlecode.goodsamples.refactoring.servicestop.support.FailedStopException;
+import com.googlecode.goodsamples.refactoring.servicestop.support.ReadOnlyNotifier;
+import com.googlecode.goodsamples.refactoring.servicestop.support.Stop;
+import com.googlecode.goodsamples.refactoring.servicestop.support.StopMessage;
 
 public class ServiceStopper {
 	Stop completeStop;
