@@ -9,6 +9,10 @@ public class ReadOnlyNotifier {
 	}
 
 	public boolean notifyToRelatedServices(StopMessage stopMessage) {
+		if (getRelatedServices().size() > 0) {
+			//...
+		}
 		return false;
 	}
+
 }

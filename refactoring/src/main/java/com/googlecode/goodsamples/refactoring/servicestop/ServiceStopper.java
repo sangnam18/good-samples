@@ -1,9 +1,9 @@
 package com.googlecode.goodsamples.refactoring.servicestop;
 
-import java.util.Date;
 import static org.apache.commons.lang.StringUtils.isEmpty;
 
-import com.googlecode.goodsamples.refactoring.servicestop.support.FailedReadOnlyNotificationException;
+import java.util.Date;
+
 import com.googlecode.goodsamples.refactoring.servicestop.support.FailedStopException;
 import com.googlecode.goodsamples.refactoring.servicestop.support.ReadOnlyNotifier;
 import com.googlecode.goodsamples.refactoring.servicestop.support.Stop;
@@ -36,11 +36,7 @@ public class ServiceStopper {
 			stopMessage.setReason(reason);
 			stopMessage.setDate(new Date());
 			
-			if (readOnlyNotifier.getRelatedServices().size() > 0) {
-				if (readOnlyNotifier.notifyToRelatedServices(stopMessage) == false)  {
-					throw new FailedReadOnlyNotificationException();
-				}
-			}
+			readOnlyNotifier.notifyToRelatedServices(stopMessage);
 		}
 	}
 
