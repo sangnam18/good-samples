@@ -1,7 +1,6 @@
 package com.googlecode.goodsamples.refactoring.servicestop;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -61,26 +60,13 @@ public final class ServiceStopperTest {
 				Mockito.any(StopMessage.class));
 	}
 
-	@Test
-	public void serviceShouldBeStopped_WhenNeedingReadOnlyStop_WithoutReadOnlyNotification() {
-		final List<String> noRelatedServices = new ArrayList<String>();
-		when(readOnlyStop.stopNow()).thenReturn(success);
-		when(readOnlyNotifier.getRelatedServices()).thenReturn(noRelatedServices);
-
-		target.stop(readOnlyStopType, "Stop in read-only test");
-		
-		verify(readOnlyNotifier).getRelatedServices();
-		verifyNoMoreInteractions(readOnlyNotifier);
-	}
-
 	@Test(expected = FailedReadOnlyNotificationException.class)
 	public void whenFailingReadOnlyNotification() {
 		when(readOnlyStop.stopNow()).thenReturn(success);
-		when(readOnlyNotifier.getRelatedServices()).thenReturn(
-				createRelatedServices());
 		when(
 				readOnlyNotifier.notifyToRelatedServices(Mockito
-						.any(StopMessage.class))).thenReturn(fail);
+						.any(StopMessage.class))).thenThrow(
+				new FailedReadOnlyNotificationException());
 
 		target.stop(readOnlyStopType, "Some reason");
 	}
