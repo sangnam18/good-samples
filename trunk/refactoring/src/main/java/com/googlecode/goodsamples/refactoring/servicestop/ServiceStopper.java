@@ -13,10 +13,10 @@ public class ServiceStopper {
 	Stop readOnlyStop;
 	ReadOnlyNotifier readOnlyNotifier;
 
-	public void stop(Integer type, String reason) {
-		if (type != null && (type == 1 || type == 2)) {
+	public void stop(Integer stopType, String reason) {
+		if (stopType != null && (stopType == 1 || stopType == 2)) {
 			if (reason != null && reason.length() > 0) {
-				if (type == 1) {
+				if (stopType == 1) {
 					if (completeStop.stopNow() == false) {
 						throw new FailedStopException("Cannot stop the service.");
 					}
