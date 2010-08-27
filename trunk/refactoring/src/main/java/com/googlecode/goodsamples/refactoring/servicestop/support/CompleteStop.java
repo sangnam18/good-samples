@@ -1,7 +1,7 @@
 package com.googlecode.goodsamples.refactoring.servicestop.support;
 
-public class CompleteStop {
-	public boolean stop() {
+public class CompleteStop implements Stop {
+	public boolean stopNow() {
 		return false;
 	}
 }
