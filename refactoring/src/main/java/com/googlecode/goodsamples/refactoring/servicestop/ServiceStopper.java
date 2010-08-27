@@ -19,32 +19,32 @@ public class ServiceStopper {
 	}
 
 	public void stop(StopType stopType, String reason) {
-		if (stopType != null) {
-			if (reason != null && reason.length() > 0) {
-				if (stopType == StopType.COMPLETE_STOP) {
-					if (completeStop.stopNow() == false) {
-						throw new FailedStopException("Cannot stop the service.");
-					}
-				} else {
-					if (readOnlyStop.stopNow()) {
-						StopMessage stopMessage = new StopMessage();
-						stopMessage.setReason(reason);
-						stopMessage.setDate(new Date());
-						
-						if (readOnlyNotifier.getRelatedServices().size() > 0) {
-							if (readOnlyNotifier.notifyToRelatedServices(stopMessage) == false)  {
-								throw new FailedReadOnlyNotificationException();
-							}
-						}
-					} else {
-						throw new FailedStopException("Cannot stop the service.");
-					}
-				}
-				
-				return;
-			}
+		if (stopType == null) {
+			throw new IllegalArgumentException("StopType cannot be empty.");
 		}
 		
-		throw new IllegalArgumentException("Type or reason cannot be empty.");
+		if (reason == null || reason.length() == 0) {
+			throw new IllegalArgumentException("Reason cannot be empty.");
+		}
+		
+		if (stopType == StopType.COMPLETE_STOP) {
+			if (completeStop.stopNow() == false) {
+				throw new FailedStopException("Cannot stop the service.");
+			}
+		} else {
+			if (readOnlyStop.stopNow()) {
+				StopMessage stopMessage = new StopMessage();
+				stopMessage.setReason(reason);
+				stopMessage.setDate(new Date());
+				
+				if (readOnlyNotifier.getRelatedServices().size() > 0) {
+					if (readOnlyNotifier.notifyToRelatedServices(stopMessage) == false)  {
+						throw new FailedReadOnlyNotificationException();
+					}
+				}
+			} else {
+				throw new FailedStopException("Cannot stop the service.");
+			}
+		}
 	}
 }
