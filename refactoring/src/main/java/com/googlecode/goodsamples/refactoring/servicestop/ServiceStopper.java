@@ -1,6 +1,7 @@
 package com.googlecode.goodsamples.refactoring.servicestop;
 
 import java.util.Date;
+import static org.apache.commons.lang.StringUtils.isEmpty;
 
 import com.googlecode.goodsamples.refactoring.servicestop.support.FailedReadOnlyNotificationException;
 import com.googlecode.goodsamples.refactoring.servicestop.support.FailedStopException;
@@ -23,7 +24,7 @@ public class ServiceStopper {
 			throw new IllegalArgumentException("StopType cannot be empty.");
 		}
 		
-		if (reason == null || reason.length() == 0) {
+		if (isEmpty(reason)) {
 			throw new IllegalArgumentException("Reason cannot be empty.");
 		}
 		
