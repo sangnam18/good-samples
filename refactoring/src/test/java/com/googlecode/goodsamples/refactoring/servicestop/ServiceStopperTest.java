@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.googlecode.goodsamples.refactoring.servicestop.ServiceStopper.StopType;
 import com.googlecode.goodsamples.refactoring.servicestop.support.FailedReadOnlyNotificationException;
 import com.googlecode.goodsamples.refactoring.servicestop.support.FailedStopException;
 import com.googlecode.goodsamples.refactoring.servicestop.support.ReadOnlyNotifier;
@@ -23,8 +24,8 @@ import com.googlecode.goodsamples.refactoring.servicestop.support.StopMessage;
 @RunWith(MockitoJUnitRunner.class)
 public final class ServiceStopperTest {
 	private final ServiceStopper target = new ServiceStopper();
-	private final Integer completeStopType = 1;
-	private final Integer readOnlyStopType = 2;
+	private final StopType completeStopType = StopType.COMPLETE_STOP;
+	private final StopType readOnlyStopType = StopType.READONLY_STOP;
 	private final Boolean success = Boolean.TRUE;
 	private final Boolean fail = Boolean.FALSE;
 
@@ -100,26 +101,20 @@ public final class ServiceStopperTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void whenStopTypeIsNull() {
-		final Integer stopType = null;
+		final StopType stopType = null;
 		target.stop(stopType, "Some reason");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void whenStopTypeIsInvalid() {
-		final Integer notSupportedType = -1;
-		target.stop(notSupportedType, "Some reason");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void whenReasonIsNull() {
-		final Integer someType = 1;
+		final StopType someType = StopType.COMPLETE_STOP;
 		final String reason = null;
 		target.stop(someType, reason);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void whenReasonIsEmpty() {
-		final Integer someType = 1;
+		final StopType someType = StopType.COMPLETE_STOP;
 		final String reason = "";
 		target.stop(someType, reason);
 	}

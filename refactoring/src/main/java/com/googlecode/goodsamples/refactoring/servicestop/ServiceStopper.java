@@ -12,11 +12,16 @@ public class ServiceStopper {
 	Stop completeStop;
 	Stop readOnlyStop;
 	ReadOnlyNotifier readOnlyNotifier;
+	
+	public enum StopType {
+		COMPLETE_STOP,
+		READONLY_STOP;
+	}
 
-	public void stop(Integer stopType, String reason) {
-		if (stopType != null && (stopType == 1 || stopType == 2)) {
+	public void stop(StopType stopType, String reason) {
+		if (stopType != null) {
 			if (reason != null && reason.length() > 0) {
-				if (stopType == 1) {
+				if (stopType == StopType.COMPLETE_STOP) {
 					if (completeStop.stopNow() == false) {
 						throw new FailedStopException("Cannot stop the service.");
 					}
