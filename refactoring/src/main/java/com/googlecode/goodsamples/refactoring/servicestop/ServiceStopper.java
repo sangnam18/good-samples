@@ -30,7 +30,7 @@ public class ServiceStopper {
 		
 		if (stopType == StopType.COMPLETE_STOP) {
 			stopNow(completeStop);
-		} else {
+		} else if (stopType == StopType.READONLY_STOP){
 			stopNow(readOnlyStop);
 			readOnlyNotifier.notifyToRelatedServices(createStopMessageBy(reason));
 		}

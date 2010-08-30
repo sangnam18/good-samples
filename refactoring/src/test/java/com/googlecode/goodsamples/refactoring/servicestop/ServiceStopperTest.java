@@ -37,7 +37,7 @@ public final class ServiceStopperTest {
 
 	@Test
 	public void serviceShouldBeStopped_WhenNeedingCompleteStop() {
-		when(completeStop.stopNow()).thenReturn(Boolean.TRUE);
+		when(completeStop.stopNow()).thenReturn(success);
 
 		target.stop(completeStopType, "Completely stop test");
 
@@ -87,22 +87,22 @@ public final class ServiceStopperTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void whenStopTypeIsNull() {
-		final StopType stopType = null;
-		target.stop(stopType, "Some reason");
+		final StopType nullStopType = null;
+		target.stop(nullStopType, "Some reason");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void whenReasonIsNull() {
 		final StopType someType = StopType.COMPLETE_STOP;
-		final String reason = null;
-		target.stop(someType, reason);
+		final String nullReason = null;
+		target.stop(someType, nullReason);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void whenReasonIsEmpty() {
 		final StopType someType = StopType.COMPLETE_STOP;
-		final String reason = "";
-		target.stop(someType, reason);
+		final String emptyReason = "";
+		target.stop(someType, emptyReason);
 	}
 
 	private List<String> createRelatedServices() {
