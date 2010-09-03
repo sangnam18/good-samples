@@ -1,5 +1,6 @@
 package com.googlecode.goodsamples.springbatch.retry;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.Job;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.goodsamples.springbatch.AbstractJobRepositoryInitilization;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/META-INF/spring/RetryContext.xml" })
 @TransactionConfiguration(defaultRollback = true)
