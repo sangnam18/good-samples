@@ -7,10 +7,10 @@
 
 	<context:component-scan base-package="com.googlecode" />
 
-	<job id="retryJob" xmlns="http://www.springframework.org/schema/batch">
-		<step id="retry">
+	<job id="continuationJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="continuation">
 			<tasklet>
-				<chunk reader="retryStreamItemReader" writer="retryWriter"
+				<chunk reader="continuationStreamItemReader" writer="continuationWriter"
 					commit-interval="3"/>
 			</tasklet>
 		</step>
