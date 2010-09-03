@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch.retry;
+package com.googlecode.goodsamples.springbatch.continuation;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.googlecode.goodsamples.springbatch.basic.Name;
 import com.googlecode.goodsamples.springbatch.basic.NameDAO;
 
 @Component
-public class RetryWriter implements ItemWriter<Integer> {
+public class ContinuationWriter implements ItemWriter<Integer> {
 	@Autowired
 	NameDAO nameDAO;
 	

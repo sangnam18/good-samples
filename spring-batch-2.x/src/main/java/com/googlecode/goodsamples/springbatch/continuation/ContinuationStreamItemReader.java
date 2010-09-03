@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.springbatch.retry;
+package com.googlecode.goodsamples.springbatch.continuation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.batch.item.support.AbstractItemCountingItemStreamItem
 import org.springframework.stereotype.Component;
 
 @Component
-public class RetryStreamItemReader extends AbstractItemCountingItemStreamItemReader<Integer> {
+public class ContinuationStreamItemReader extends AbstractItemCountingItemStreamItemReader<Integer> {
 	List<Integer> source = new ArrayList<Integer>();
 	Integer position = 0;
 	
