@@ -5,18 +5,12 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs.Ids;
-import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,14 +20,8 @@ import org.junit.Test;
  *  </p>
  */
 
-public class BasicOperationTest {
-	private static final String HOST = "127.0.0.1:2181";
-	private static ZooKeeper zooKeeper;
-
-	final static byte[] NO_DATA = new byte[0];
+public class BasicOperationTest extends AbstractZooKeeperTest {
 	final static String ROOT = "/test";
-	final static Integer INITIAL_VERSION = 0;
-	final static ArrayList<ACL> NO_ACL = Ids.OPEN_ACL_UNSAFE;
 	final static Object mutex = new Object();
 
 	private boolean notified = false;
@@ -85,25 +73,11 @@ public class BasicOperationTest {
 		return actualName;
 	}
 	
-	private class DefaultWatcher implements Watcher {
-		@Override
-		public void process(WatchedEvent event) {
-		}
-	}
-	
 	@Before
-	public void connectToZooKeeper() throws IOException, KeeperException,
-			InterruptedException {
-		zooKeeper = new ZooKeeper(HOST, 3000, new DefaultWatcher());
-
+	public void assertThatThereIsRootPath() throws KeeperException, InterruptedException {
 		if (zooKeeper.exists(ROOT, false) == null) {
 			zooKeeper.create(ROOT, NO_DATA, Ids.OPEN_ACL_UNSAFE,
 					CreateMode.PERSISTENT);
-		}
-	}
-
-	@After
-	public void disconnectFromZooKeeper() throws InterruptedException {
-		zooKeeper.close();
+		}		
 	}
 }
