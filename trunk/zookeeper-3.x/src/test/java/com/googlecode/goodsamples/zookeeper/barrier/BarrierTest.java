@@ -1,4 +1,4 @@
-package com.googlecode.goodsamples.zookeeper;
+package com.googlecode.goodsamples.zookeeper.barrier;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,12 +9,10 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.googlecode.goodsamples.zookeeper.barrier.Barrier;
-
 /**
  * <p>
- * Zookeeper must be running to execute this test. 
- *  </p>
+ * Zookeeper must be running to execute this test.
+ * </p>
  */
 public class BarrierTest {
 	private static final Log LOG = LogFactory.getLog(BarrierTest.class);
@@ -24,14 +22,14 @@ public class BarrierTest {
 	@Test
 	public void barrierShouldBeRunWithoutProblems() throws Exception {
 		ExecutorService executorService = runBarrierClientsAsMuchAsExpectedCount();
-		
 		executorService.shutdown();
 		executorService.awaitTermination(3, TimeUnit.SECONDS);
 	}
-	
+
 	@Test
 	@Ignore
-	public void barrierShouldBeRunWithoutProblems_When_ItIsRepeatlyRun() throws Exception {
+	public void barrierShouldBeRunWithoutProblems_When_ItIsRepeatlyRun()
+			throws Exception {
 		final Integer repeatCount = 30;
 		for (int i = 0; i < repeatCount; i++) {
 			barrierShouldBeRunWithoutProblems();
@@ -39,13 +37,14 @@ public class BarrierTest {
 	}
 
 	private ExecutorService runBarrierClientsAsMuchAsExpectedCount() {
-		ExecutorService executorService = Executors.newFixedThreadPool(PARTICIPANT_COUNT);
+		ExecutorService executorService = Executors
+				.newFixedThreadPool(PARTICIPANT_COUNT);
 		for (int i = 0; i < PARTICIPANT_COUNT; i++) {
 			executorService.execute(new BarrierClient());
 		}
 		return executorService;
 	}
-	
+
 	private class BarrierClient implements Runnable {
 		@Override
 		public void run() {
