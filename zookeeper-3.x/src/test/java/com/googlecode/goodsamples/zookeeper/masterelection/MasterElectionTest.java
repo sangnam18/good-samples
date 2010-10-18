@@ -30,14 +30,14 @@ public final class MasterElectionTest extends AbstractZooKeeperTest {
 	@Test
 	public void masterShouldBeElectedByItsPriotity() throws KeeperException,
 			InterruptedException, IOException {
-		MasterCandidate first = createCandidateBy(1);
-		MasterCandidate second = createCandidateBy(9);
+		MasterCandidate first = createCandidateBy(9999);
+		MasterCandidate second = createCandidateBy(5555);
 
-		waitUntilElectionIsCompleted(ROUND_ONE, first);
-		waitUntilElectionIsCompleted(ROUND_ONE, second);
+		first.waitUntil(ROUND_ONE);
+		second.waitUntil(ROUND_ONE);
 
-		assertThat(first.isMaster(), is(true));
-		assertThat(second.isMaster(), is(false));
+		assertThat(first.isMaster(), is(false));
+		assertThat(second.isMaster(), is(true));
 
 		clear(first, second);
 	}
@@ -48,13 +48,13 @@ public final class MasterElectionTest extends AbstractZooKeeperTest {
 		MasterCandidate first = createCandidateBy(0);
 		MasterCandidate second = createCandidateBy(999);
 
-		waitUntilElectionIsCompleted(ROUND_ONE, first);
-		waitUntilElectionIsCompleted(ROUND_ONE, second);
+		first.waitUntil(ROUND_ONE);
+		second.waitUntil(ROUND_ONE);
 
 		assertThat(first.isMaster(), is(true));
 
 		first.retire();
-		waitUntilElectionIsCompleted(ROUND_TWO, second);
+		second.waitUntil(ROUND_TWO);
 
 		assertThat(first.isMaster(), is(false));
 		assertThat(second.isMaster(), is(true));
@@ -68,15 +68,16 @@ public final class MasterElectionTest extends AbstractZooKeeperTest {
 		MasterCandidate first = createCandidateBy(0);
 		MasterCandidate second = createCandidateBy(999);
 
-		waitUntilElectionIsCompleted(ROUND_ONE, first);
-		waitUntilElectionIsCompleted(ROUND_ONE, second);
+		first.waitUntil(ROUND_ONE);
+		second.waitUntil(ROUND_ONE);
 
 		first.retire();
-		waitUntilElectionIsCompleted(ROUND_TWO, second);
+		second.waitUntil(ROUND_TWO);
 
 		first = createCandidateBy(1);
-		waitUntilElectionIsCompleted(ROUND_ONE, first);
-		waitUntilElectionIsCompleted(ROUND_THREE, second);
+
+		first.waitUntil(ROUND_ONE);
+		second.waitUntil(ROUND_THREE);
 
 		assertThat(first.isMaster(), is(true));
 		assertThat(second.isMaster(), is(false));
@@ -111,12 +112,5 @@ public final class MasterElectionTest extends AbstractZooKeeperTest {
 		}
 		service.shutdown();
 		service.awaitTermination(1, TimeUnit.SECONDS);
-	}
-
-	private void waitUntilElectionIsCompleted(Integer round,
-			MasterCandidate candidate) throws InterruptedException {
-		while (candidate.isNotEndedRound(round)) {
-			Thread.sleep(10);
-		}
 	}
 }

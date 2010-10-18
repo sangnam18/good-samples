@@ -134,4 +134,10 @@ public class MasterCandidate implements Watcher, Runnable {
 	private boolean canBeMaster(String elected) {
 		return elected.equals(PREFIX + priority);
 	}
+
+	public void waitUntil(Integer round) throws InterruptedException {
+		while (isNotEndedRound(round)) {
+			Thread.sleep(10);
+		}
+	}
 }
