@@ -54,7 +54,8 @@ public class MasterCandidate implements Watcher, Runnable {
 
 					if (canBeMaster(elect(candidates))) {
 						master = true;
-						LOG.info(priority + " is elected among " + candidates);
+						LOG.info(priority + " has just elected among "
+								+ candidates);
 					} else {
 						master = false;
 						LOG.info(priority + " is watching for among "
@@ -88,7 +89,7 @@ public class MasterCandidate implements Watcher, Runnable {
 	}
 
 	public void retire() throws InterruptedException {
-		LOG.info(priority + " is retired");
+		LOG.info(priority + " has just retired");
 		master = false;
 		close();
 	}
@@ -98,7 +99,7 @@ public class MasterCandidate implements Watcher, Runnable {
 		closeZookeeper();
 	}
 
-	public boolean isNotEndedRound(int i) {
+	private boolean isNotEndedRound(int i) {
 		return round == i;
 	}
 
