@@ -38,7 +38,7 @@
 			<url>http://repository.springsource.com/maven/bundles/snapshot</url>
 		</repository>
 	</repositories>
-	
+
 	<properties>
 		<spring.version>3.0.0.RELEASE</spring.version>
 		<downloadSources>true</downloadSources>
@@ -80,6 +80,11 @@
 			<groupId>org.objectweb.jotm</groupId>
 			<artifactId>com.springsource.org.objectweb.jotm</artifactId>
 			<version>2.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
 		</dependency>
 	</dependencies>
 </project>
