@@ -19,10 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class PrototypeInjectionTest {
 	@Autowired
 	Prototype prototypeOne;
-
 	@Autowired
 	Prototype prototypeTwo;
-
 	@Autowired
 	Provider<Prototype> prototypeProvider;
 
