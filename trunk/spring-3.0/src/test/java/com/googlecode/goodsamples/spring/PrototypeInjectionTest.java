@@ -3,9 +3,6 @@ package com.googlecode.goodsamples.spring;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.inject.Provider;
 
 import org.junit.Test;
@@ -30,15 +27,10 @@ public class PrototypeInjectionTest {
 	}
 
 	@Test
-	public void newPrototypeShouldBeInjectedAlways() {
-		Set<Prototype> prototypes = new HashSet<Prototype>();
+	public void newPrototypeShouldBePickedOutFromProvider() {
+		Prototype a = prototypeProvider.get();
+		Prototype b = prototypeProvider.get();
 
-		for (int i = 0; i < 10; i++) {
-			Prototype each = prototypeProvider.get();
-			if (prototypes.contains(each)) {
-				fail();
-			}
-			prototypes.add(each);
-		}
+		assertThat(a, is(not(sameInstance(b))));
 	}
 }
