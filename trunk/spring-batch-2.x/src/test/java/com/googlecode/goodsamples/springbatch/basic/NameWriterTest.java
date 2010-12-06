@@ -9,28 +9,31 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.batch.item.ItemWriter;
 
-import com.googlecode.goodsamples.springbatch.basic.Name;
-import com.googlecode.goodsamples.springbatch.basic.NameDAO;
-import com.googlecode.goodsamples.springbatch.basic.NameWriter;
-
 public class NameWriterTest {
 	ItemWriter<Name> O = new NameWriter();
 	NameDAO nameDAO = mock(InMemoryNameDAO.class);
 
 	@Before
 	public void prepareMock() {
-		((NameWriter) O).nameDAO = nameDAO;
+		((NameWriter)O).nameDAO = nameDAO;
 	}
 
 	@Test
-	public void givenItemsShouldBePersistedAgain() throws Exception {
-		List<Name> items = new ArrayList<Name>();
-		Name name = new Name(1);
-		name.name = "Min";
-		items.add(name);
+	public void givenNamesShouldBePersistedToDatabase() throws Exception {
+		List<Name> names = new ArrayList<Name>();
+		Name name = new Name(id(1), name("Min"));
+		names.add(name);
 
-		O.write(items);
+		O.write(names);
 
 		verify(nameDAO).update(name);
+	}
+
+	private String name(String name) {
+		return name;
+	}
+
+	private Integer id(int id) {
+		return id;
 	}
 }
