@@ -12,5 +12,9 @@
 			class="com.googlecode.goodsamples.xwork.HelloWorldAction">
 			<result name="success">/hello.jsp</result>
 		</action>
+		<action name="MemoList"
+			class="com.googlecode.goodsamples.xwork.MemoListAction">
+			<result name="success">/memolist.jsp</result>
+		</action>
 	</package>
 </xwork>

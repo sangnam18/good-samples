@@ -1,30 +1,45 @@
 package com.googlecode.goodsamples.xwork;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import com.opensymphony.xwork.Action;
-
+@RunWith(MockitoJUnitRunner.class)
 public class MemoListActionTest {
 	MemoListAction sut = new MemoListAction();
+	@Mock
+	MemoService memoService;
 
 	@Test
-	public void 메모목록을가져온다() {
-		List<Memo> expectedMemos = new ArrayList<Memo>();
-		MemoService memoBO = mock(MemoService.class);
-		when(memoBO.allMemos()).thenReturn(expectedMemos);
-		sut.memoService = memoBO;
-		
+	public void shouldExposeMemos() {
+		List<Memo> memos = new ArrayList<Memo>();
+		when(memoService.memos()).thenReturn(memos);
+
+		List<Memo> result = sut.getMemos();
+
+		assertThat(result, is(notNullValue()));
+		assertThat(result, is(sameInstance(memos)));
+	}
+
+	@Test
+	public void shouldReturnSuccess() throws Exception {
 		String result = sut.execute();
-		
-		assertThat(result, is(Action.SUCCESS));
-		assertThat(sut.getMemos(), is(expectedMemos));
+
+		assertThat(result, is(com.opensymphony.xwork.Action.SUCCESS));
+
+	}
+
+	@Before
+	public void prepareColloborators() {
+		sut.memoService = memoService;
 	}
 }
