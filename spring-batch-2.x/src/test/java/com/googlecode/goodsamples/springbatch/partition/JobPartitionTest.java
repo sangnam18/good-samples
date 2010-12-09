@@ -1,8 +1,7 @@
 package com.googlecode.goodsamples.springbatch.partition;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.googlecode.goodsamples.springbatch.AbstractJobRepositoryInitilization;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/META-INF/spring/PartitionContext.xml" })
+@ContextConfiguration(locations = {"/META-INF/spring/PartitionContext.xml"})
 @TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class JobPartitionTest extends AbstractJobRepositoryInitilization {
@@ -31,16 +30,16 @@ public class JobPartitionTest extends AbstractJobRepositoryInitilization {
 	Job job;
 
 	@Test
-	public void jobShouldBeRunOnPartitionedSlaves() throws Exception {
+	public void jobShouldBeRunOnAtLeastTwoDistinctSlaves() throws Exception {
 		insertTenRowsToNameTable();
 
 		jobLauncher.run(job, new JobParameters());
-		
+
 		assertThat(rowCountOfNameTable(), is(ROWCOUNT));
-		assertThat(usedWorkerThreadCount(), is(greaterThan(2)));
+		assertThat(usedSlavesCount(), is(greaterThan(2)));
 	}
 
-	private int usedWorkerThreadCount() {
+	private int usedSlavesCount() {
 		return jdbcTemplate.queryForList("SELECT DISTINCT(worker) FROM targetOfName").size();
 	}
 
@@ -51,7 +50,7 @@ public class JobPartitionTest extends AbstractJobRepositoryInitilization {
 	private void insertTenRowsToNameTable() {
 		String sqlToInsert = "INSERT INTO name VALUES (?, ?);";
 		for (int i = 0; i < ROWCOUNT; i++) {
-			jdbcTemplate.update(sqlToInsert, i, "Name_" + i);			
+			jdbcTemplate.update(sqlToInsert, i, "Name_" + i);
 		}
 	}
 
@@ -73,7 +72,7 @@ public class JobPartitionTest extends AbstractJobRepositoryInitilization {
 
 	@After
 	public void dropNameTable() {
-		jdbcTemplate.update("DROP TABLE name");		
-		jdbcTemplate.update("DROP TABLE targetOfName");		
-	}	
+		jdbcTemplate.update("DROP TABLE name");
+		jdbcTemplate.update("DROP TABLE targetOfName");
+	}
 }
