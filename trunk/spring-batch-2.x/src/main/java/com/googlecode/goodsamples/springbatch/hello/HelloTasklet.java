@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HelloTasklet implements Tasklet {
-	Log log =  LogFactory.getLog(HelloTasklet.class);
+	Log log = LogFactory.getLog(HelloTasklet.class);
 
-	@Override
-	public RepeatStatus execute(StepContribution contribution,
-			ChunkContext chunkContext) throws Exception {
+	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 		log.info("Hello");
 		return RepeatStatus.FINISHED;
 	}
