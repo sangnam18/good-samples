@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 public class RetryTasklet implements Tasklet {
 	static int executionCount = 0;
 
-	@Override
-	public RepeatStatus execute(StepContribution contribution,
-			ChunkContext chunkContext) throws Exception {
+	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 		executionCount++;
 		throw new SomeBatchRelatedException();
 	}

@@ -13,10 +13,9 @@ import com.googlecode.goodsamples.springbatch.basic.NameDAO;
 public class ContinuationWriter implements ItemWriter<Integer> {
 	@Autowired
 	NameDAO nameDAO;
-	
+
 	boolean errorHook = true;
-	
-	@Override
+
 	public void write(List<? extends Integer> items) throws Exception {
 		for (Integer each : items) {
 			if (errorHook && each.intValue() == 4) {

@@ -14,12 +14,10 @@ public class PartitionWriter implements ItemWriter<Name> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@Override
 	public void write(List<? extends Name> names) throws Exception {
 		for (Name eachName : names) {
 			String sql = "INSERT INTO targetOfName VALUES (?,?,?)";
-			jdbcTemplate.update(sql, eachName.id(), eachName.name(), Thread
-					.currentThread().getId());
+			jdbcTemplate.update(sql, eachName.id(), eachName.name(), Thread.currentThread().getId());
 		}
 	}
 }
