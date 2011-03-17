@@ -4,5 +4,5 @@
 string : ${string}
 </p>
 <p>
-hello : ${name}
+name : ${name}
 </p>
