@@ -15,11 +15,6 @@
 			<url>http://s3.amazonaws.com/maven.springframework.org/release</url>
 		</repository>
 		<repository>
-			<id>spring-releases</id>
-			<name>Spring Maven RELEASE Repository</name>
-			<url>http://s3.amazonaws.com/maven.springframework.org/release</url>
-		</repository>
-		<repository>
 			<id>jboss</id>
 			<url>http://repository.jboss.com/maven2</url>
 		</repository>
@@ -34,6 +29,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.0.0.pre5</version>
 				<configuration>
 					<scanIntervalSeconds>3</scanIntervalSeconds>
 					<webAppConfig>
