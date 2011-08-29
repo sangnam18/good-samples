@@ -9,40 +9,15 @@
 	<context:component-scan base-package="com.googlecode.goodsamples.lab" />
 	<mvc:annotation-driven />
 	<tx:annotation-driven/>
+		
+	<mvc:interceptors>
+		<bean class="com.googlecode.goodsamples.lab.UserInterceptor"/>
+	</mvc:interceptors>
 
-	<bean id="viewNameTranslator"
-		class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator" />
-
-	<bean id="handlerMapping"
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="interceptors">
-			<list>
-			</list>
-		</property>
-	</bean>
-
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="mediaTypes">
-			<map>
-				<entry key="html" value="text/html" />
-				<entry key="json" value="application/json" />
-				<entry key="xml" value="text/xml" />
-			</map>
-		</property>
-		<property name="viewResolvers">
-			<list>
-				<bean id="jspViewResolver"
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-					<property name="prefix" value="/WEB-INF/jsp/" />
-					<property name="suffix" value=".jsp" />
-				</bean>		
-			</list>
-		</property>
-		<property name="defaultViews">
-			<list>
-			</list>
-		</property>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>
