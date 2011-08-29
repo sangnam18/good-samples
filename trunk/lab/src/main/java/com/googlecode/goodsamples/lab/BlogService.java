@@ -15,7 +15,19 @@ public class BlogService {
 	}
 	
 	public List<Visitor> visitors() {
-		return blogRepository.findAll();
+		return blogRepository.findAllVisitors();
+	}
+
+	public List<Article> articles() {
+		return blogRepository.findAllArticles();
+	}
+
+	public Profile profile() {
+		return blogRepository.findProfile();
+	}
+
+	public List<Comment> comments() {
+		return blogRepository.findComments();
 	}
 
 }

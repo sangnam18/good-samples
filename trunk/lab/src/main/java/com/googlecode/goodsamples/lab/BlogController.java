@@ -19,10 +19,9 @@ public class BlogController {
 	public ModelAndView section(String name) {
 		ModelAndView result = new ModelAndView();
 		result.addObject("visitors", blogService.visitors());
-//		result.addObject(blogService.otherArticles());
-//		result.addObject(blogService.lastArticle());
-//		result.addObject(blogService.profile());
-//		result.addObject(blogService.comments());
+		result.addObject("articles", blogService.articles());
+		result.addObject("profile", blogService.profile());
+		result.addObject("comments", blogService.comments());
 		return result;
 	}
 }
