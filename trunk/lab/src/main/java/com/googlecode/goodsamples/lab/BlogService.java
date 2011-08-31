@@ -14,20 +14,19 @@ public class BlogService {
 		this.blogRepository = blogRepository;
 	}
 	
-	public List<Visitor> visitors() {
-		return blogRepository.findAllVisitors();
+	public List<Visitor> visitorsOf(String id) {
+		return blogRepository.findAllVisitorsBy(id);
 	}
 
-	public List<Article> articles() {
-		return blogRepository.findAllArticles();
+	public List<Article> articlesOf(String id) {
+		return blogRepository.findAllArticlesBy(id);
 	}
 
-	public Profile profile() {
-		return blogRepository.findProfile();
+	public Profile profileOf(String id) {
+		return blogRepository.findProfileBy(id);
 	}
 
-	public List<Comment> comments() {
-		return blogRepository.findComments();
+	public List<Comment> commentsOf(String id) {
+		return blogRepository.findCommentsBy(id);
 	}
-
 }
