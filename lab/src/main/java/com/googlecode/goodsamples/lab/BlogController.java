@@ -2,6 +2,7 @@ package com.googlecode.goodsamples.lab;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,13 +16,14 @@ public class BlogController {
 		this.blogService = blogService;
 	}
 
-	@RequestMapping(value = "/blog", method = {RequestMethod.GET})
-	public ModelAndView section(String name) {
+	@RequestMapping(value = "/blog/{id}", method = {RequestMethod.GET})
+	public ModelAndView section(@PathVariable String id) {
 		ModelAndView result = new ModelAndView();
-		result.addObject("visitors", blogService.visitors());
-		result.addObject("articles", blogService.articles());
-		result.addObject("profile", blogService.profile());
-		result.addObject("comments", blogService.comments());
+		result.addObject("visitors", blogService.visitorsOf(id));
+		result.addObject("articles", blogService.articlesOf(id));
+		result.addObject("profile", blogService.profileOf(id));
+		result.addObject("comments", blogService.commentsOf(id));
+		result.setViewName("blog");
 		return result;
 	}
 }

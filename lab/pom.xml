@@ -138,11 +138,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.test</artifactId>
 			<version>${spring.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>2.4</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -171,28 +179,10 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<useProjectReferences>true</useProjectReferences>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.4.3</version>
 				<configuration>
 					<encoding>${encoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<webappDirectory>${deploy.dir}</webappDirectory>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
-					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-					<sourceEncoding>${encoding}</sourceEncoding>
 				</configuration>
 			</plugin>
 		</plugins>
