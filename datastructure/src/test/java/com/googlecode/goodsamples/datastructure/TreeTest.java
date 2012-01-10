@@ -1,13 +1,13 @@
 package com.googlecode.goodsamples.datastructure;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TreeTest {
-	private Tree sut = new Tree();
+	private Tree<String> sut = new Tree<String>();
 	
 	@Test
 	public void nodeCanBeAdded() {
@@ -21,14 +21,14 @@ public class TreeTest {
 		assertThat(sut.level(), is(3));
 		assertThat(result, is("[4,3,5,null,null,null,6]"));
 	}
-
+	
 	@Test
 	public void nodeCanBeAddedDisproportionately() {
 		sut.add("3");
 		sut.add("10");
 		sut.add("15");
 		sut.add("16");
-		
+
 		String result = sut.toString();
 		
 		assertThat(sut.level(), is(4));
@@ -38,7 +38,7 @@ public class TreeTest {
 	@Test
 	public void treeShouldBeGrownDouble() {
 		final int initialCapacity = 16;
-		sut = new Tree(16);
+		sut = new Tree<String>(16);
 		sut.add("3");
 		sut.add("10");
 		sut.add("15");
@@ -49,7 +49,6 @@ public class TreeTest {
 		assertThat(sut.length(), is(initialCapacity * 2));
 	}
 
-	@Ignore
 	@Test
 	public void itemCanBeSearched() {
 		sut.add("3");
@@ -57,8 +56,16 @@ public class TreeTest {
 		sut.add("15");
 		sut.add("16");
 		
-		//String result = sut.searchBy("16");
+		assertThat(sut.searchBy("16"), is("16"));
+	}
+
+	@Test
+	public void shouldReturnNullIfThereIsNoSearchedItem() {
+		sut.add("3");
+		sut.add("10");
+		sut.add("15");
+		sut.add("16");
 		
-		//assertThat(result, is("16"));
+		assertThat(sut.searchBy("9"), is(nullValue()));
 	}
 }
