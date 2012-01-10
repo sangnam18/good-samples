@@ -17,7 +17,7 @@ public class Tree<T> {
 	}
 
 	public void add(T item) {
-		int result = findNewNodeIndexToInsert(item, 0, 1);
+		int result = findNodeIndexToInsert(item, 0, 1);
 		items[result] = item;
 	}
 
@@ -50,7 +50,7 @@ public class Tree<T> {
 		}
 	}
 
-	private int findNewNodeIndexToInsert(T item, int index, int level) {
+	private int findNodeIndexToInsert(T item, int index, int level) {
 		if (items[index] == null) {
 			if (this.level < level ) {
 				this.level = level;
@@ -64,9 +64,9 @@ public class Tree<T> {
 		int itemHash = item.hashCode();
 
 		if (currentRootHash > itemHash) {
-			return findNewNodeIndexToInsert(item, left(index), ++level);
+			return findNodeIndexToInsert(item, left(index), ++level);
 		} else {
-			return findNewNodeIndexToInsert(item, right(index), ++level);
+			return findNodeIndexToInsert(item, right(index), ++level);
 		}
 	}
 
