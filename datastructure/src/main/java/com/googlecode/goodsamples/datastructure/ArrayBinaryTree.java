@@ -2,17 +2,17 @@ package com.googlecode.goodsamples.datastructure;
 
 import java.util.Arrays;
 
-public class Tree<T> {
-	private static final int NO_ITEM = -1;
+public class ArrayBinaryTree<T> {
+	private static final int NOT_FOUND_ITEM = -1;
 	private static final int INITIAL_CAPACITY = 16;
 	private int level;
 	private transient Object[] items;
 
-	public Tree() {
+	public ArrayBinaryTree() {
 		this(INITIAL_CAPACITY);
 	}
 
-	public Tree(int capacity) {
+	public ArrayBinaryTree(int capacity) {
 		items = new Object[capacity];		
 	}
 
@@ -24,7 +24,15 @@ public class Tree<T> {
 	@SuppressWarnings("unchecked")
 	public T searchBy(T item) {
 		int result = findMatchedNodeIndex(item, 0, 1);
-		return result == NO_ITEM ? null : (T)items[result];
+		return result == NOT_FOUND_ITEM ? null : (T)items[result];
+	}
+
+	int length() {
+		return items.length;
+	}
+
+	int level() {
+		return level;
 	}
 
 	private int findMatchedNodeIndex(T item, int index, int level) {
@@ -37,16 +45,16 @@ public class Tree<T> {
 		@SuppressWarnings("unchecked")
 		T currentItem = (T) items[index];
 		if (currentItem == null) {
-			return NO_ITEM;
+			return NOT_FOUND_ITEM;
 		} 
 		
 		int currentRootHash = currentItem.hashCode();
 		int itemHash = item.hashCode();
 
 		if (currentRootHash > itemHash) {
-			return findMatchedNodeIndex(item, left(index), ++level);
+			return findMatchedNodeIndex(item, leftIndexOf(index), ++level);
 		} else {
-			return findMatchedNodeIndex(item, right(index), ++level);
+			return findMatchedNodeIndex(item, rightIndexOf(index), ++level);
 		}
 	}
 
@@ -64,9 +72,9 @@ public class Tree<T> {
 		int itemHash = item.hashCode();
 
 		if (currentRootHash > itemHash) {
-			return findNodeIndexToInsert(item, left(index), ++level);
+			return findNodeIndexToInsert(item, leftIndexOf(index), ++level);
 		} else {
-			return findNodeIndexToInsert(item, right(index), ++level);
+			return findNodeIndexToInsert(item, rightIndexOf(index), ++level);
 		}
 	}
 
@@ -80,24 +88,16 @@ public class Tree<T> {
 		return items.length - 1;
 	}
 
-	private int right(int index) {
-		return 2 * index + 2;
+	private int rightIndexOf(int parentIndex) {
+		return 2 * parentIndex + 2;
 	}
 
-	private int left(int index) {
-		return 2 * index + 1;
+	private int leftIndexOf(int parentIndex) {
+		return 2 * parentIndex + 1;
 	}
 
 	private int rightLeafIndexOf(int parentIndex) {
-		return left(parentIndex);
-	}
-
-	int length() {
-		return items.length;
-	}
-
-	int level() {
-		return level;
+		return leftIndexOf(parentIndex);
 	}
 
 	@Override

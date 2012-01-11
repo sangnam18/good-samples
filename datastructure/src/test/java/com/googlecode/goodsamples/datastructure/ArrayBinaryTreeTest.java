@@ -6,8 +6,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class TreeTest {
-	private Tree<String> sut = new Tree<String>();
+public class ArrayBinaryTreeTest {
+	private ArrayBinaryTree<String> sut = new ArrayBinaryTree<String>();
 	
 	@Test
 	public void nodeCanBeAdded() {
@@ -38,7 +38,7 @@ public class TreeTest {
 	@Test
 	public void treeShouldBeGrownDouble() {
 		final int initialCapacity = 16;
-		sut = new Tree<String>(16);
+		sut = new ArrayBinaryTree<String>(16);
 		sut.add("3");
 		sut.add("10");
 		sut.add("15");
