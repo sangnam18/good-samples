@@ -9,6 +9,9 @@
 
 	<!-- 
 		Our filters should be applied to only secured URLs.
+		Assume that our service does not use session.
+		If there is no pre-authenticated principal, returns 503 after throwing UserNameNotFoundException.
+		
 		ex) /secured/home   
 	 -->
 	<security:http pattern="/secured/**" entry-point-ref="http403EntryPoint" create-session="stateless">
