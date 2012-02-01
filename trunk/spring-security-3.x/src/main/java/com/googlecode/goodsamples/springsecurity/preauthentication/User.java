@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @SuppressWarnings("serial")
 public class User implements UserDetails {
 	private String userName;
-	
+
 	public User(String userName) {
 		this.userName = userName;
 	}
@@ -19,7 +19,7 @@ public class User implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.EMPTY_LIST;
 	}
-
+ 
 	@Override
 	public String getPassword() {
 		return "";
