@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+                           http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<rabbit:connection-factory id="connectionFactory"
+		host="10.64.135.189" username="guest" password="guest"
+		channel-cache-size="5" />
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" />
+	<rabbit:admin id="rabbitAdmin" connection-factory="connectionFactory" />
+
+	<bean id="hello.string" class="org.springframework.amqp.core.Queue">
+		<constructor-arg name="name" value="hello.string" />
+		<constructor-arg name="autoDelete" value="false" />
+		<constructor-arg name="exclusive" value="false" />
+		<constructor-arg name="durable" value="true" />
+		<constructor-arg name="arguments">
+			<map>
+				<entry key="x-ha-policy" value="all" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="hello.object" class="org.springframework.amqp.core.Queue">
+		<constructor-arg name="name" value="hello.object" />
+		<constructor-arg name="autoDelete" value="false" />
+		<constructor-arg name="exclusive" value="false" />
+		<constructor-arg name="durable" value="true" />
+		<constructor-arg name="arguments">
+			<map>
+				<entry key="x-ha-policy" value="all" />
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>
