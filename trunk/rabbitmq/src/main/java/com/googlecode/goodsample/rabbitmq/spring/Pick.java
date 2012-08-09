@@ -51,4 +51,9 @@ public class Pick implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Pick [id=" + id + ", photo=" + photo + "]";
+	}
 }
